@@ -1,3 +1,21 @@
+/* 
+206. Reverse Linked List
+
+Example:
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+given: 1 -> 2 -> 3 -> 4 -> 5
+reverse: 5 -> 4 -> 3 -> 2 -> 1
+
+Input: head = [1,2]
+Output: [2,1]
+given: 1 -> 2
+reverse: 2 -> 1
+
+Input: head = []
+Output: [] 
+*/
+
 // definition for a singly-linked list
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
