@@ -15,7 +15,6 @@ swap: 2 -> 1 -> 3
 """
 
 from typing import Optional
-from reverse_list import linked_list_to_list, list_to_linked_list
 
 # Definition for singly-linked list.
 class ListNode:
@@ -23,29 +22,65 @@ class ListNode:
         self.val = val
         self.next = next
 class Solution:
+    def __init__(self):
+        self.head = None
+
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # create a dummy node
-        dummy = ListNode(0, 1)
+        dummy = ListNode(0)
         dummy.next = head
 
         curr = dummy
 
         # check that the nodes to be swapped are not null
-        while curr.next is not None and curr.next.next is not None:
+        while curr.next and curr.next.next:
             # identify nodes to swap
-            swap1 = curr.next
-            swap2 = curr.next.next
+            first = curr.next
+            second = first.next
 
             # actual swap
-            swap1.next = swap2.next
-            swap2.next = swap1
+            first.next = second.next
+            second.next = first
+            curr.next = second
 
             # next pair swap
-            curr.next = swap2
-            curr = swap1
+            curr = first
         
         return dummy.next
+    
+    def insert_node(self, val):
+        new_node = ListNode(val)
+        if not self.head:
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+    
+    def dislay(self):
+        nodes = []
+        current = self.head
+        while current:
+            nodes.append(current.val)
+            current = current.next
+        print(" -> ".join(map(str, nodes)))
 
-sol = Solution()
-linked_list = list_to_linked_list([4])
-print(linked_list_to_list(sol.swapPairs(linked_list)))
+if __name__ == "__main__":
+    sol = Solution()
+    sol.insert_node(1)
+    sol.insert_node(2)
+    # sol.insert_node(3)
+    # sol.insert_node(4)
+    # sol.insert_node(6)
+
+    # display the inserted list
+    print("Original list:")
+    sol.dislay()
+
+    # swap pairs
+    sol.head = sol.swapPairs(sol.head)
+    
+    # display list after swapping
+    print("After swapping:")
+    sol.dislay()
